@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp" >
+
+
+    <TextView
+        android:id="@+id/recharge_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dip"
+        android:paddingTop="6dip"
+        android:text="Value"
+        android:textColor="#43bd00"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/talktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dip"
+        android:text="TALKTIME"
+        android:textColor="#acacac"
+        android:layout_above="@+id/validity"
+        android:layout_alignLeft="@+id/validity"
+        android:layout_alignStart="@+id/validity" />
+    <TextView
+        android:id="@+id/recharge_talktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dip"
+        android:text="Talktime data"
+        android:textColor="#acacac"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/recharge_validity"
+        android:layout_alignStart="@+id/recharge_validity" />
+    <TextView
+        android:id="@+id/validity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="VALIDITY"
+        android:textColor="#5d5d5d"
+        android:textStyle="bold"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_below="@+id/recharge_talktime"
+        android:layout_toRightOf="@+id/recharge_value"
+        android:layout_toEndOf="@+id/recharge_value" />
+    <TextView
+        android:id="@+id/recharge_validity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Validity data"
+        android:textColor="#5d5d5d"
+        android:textStyle="bold"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_below="@+id/recharge_talktime"
+        android:layout_toRightOf="@+id/validity"
+        android:layout_toEndOf="@+id/validity" />
+
+</RelativeLayout>

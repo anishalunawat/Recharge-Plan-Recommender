@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RPR</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="phone">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="suggest">Suggest Plans</string>
+    <string name="plan_topup_cost">Plan topUp Cost</string>
+    <string name="total_cost">Total Cost</string>
+    <string name="usage_cost">Usage Cost</string>
+    <string name="expected">Expected \n Cost</string>
+    <string name="cost">Cost</string>
+    <string name="operator">Local Min</string>
+    <string name="charge">CHARGE</string>
+    <string name="validity">VALIDITY</string>
+    <string name="Usage">Usage</string>
+    <string name="submit">Submit</string>
+</resources>
