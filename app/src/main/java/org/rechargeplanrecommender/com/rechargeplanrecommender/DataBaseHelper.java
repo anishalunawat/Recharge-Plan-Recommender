@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,11 +67,26 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     }
 
+    private boolean checkDataBase(){
+        boolean checkdb = false;
+        try{
+            String myPath = myContext.getFilesDir().getAbsolutePath().replace("files", "databases")+File.separator + DB_NAME;
+            File dbfile = new File(myPath);
+            checkdb = dbfile.exists();
+        }
+        catch(SQLiteException e){
+            System.out.println("Database doesn't exist");
+        }
+
+        return checkdb;
+    }
+
+
     /**
      * Check if the database already exist to avoid re-copying the file each time you open the application.
      * @return true if it exists, false if it doesn't
      */
-    private boolean checkDataBase(){
+   /* private boolean checkDataBase(){
 
         SQLiteDatabase checkDB = null;
 
@@ -91,7 +107,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         }
 
         return checkDB != null ? true : false;
-    }
+    }*/
 
     /**
      * Copies your database from your local assets-folder to the just created empty database in the

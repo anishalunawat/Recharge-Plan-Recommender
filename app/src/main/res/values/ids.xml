@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="LOGOUT" type="id">btnLogout</item>
+    <item name="action_settings" type="id">settings</item>
+</resources>

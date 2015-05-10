@@ -4,6 +4,8 @@ package org.rechargeplanrecommender.com.rechargeplanrecommender;
  * Created by NOKIA ASHA on 11/04/2015.
  */
 public class TimeValue {
+    private  String my_num;
+    private  String my_operator;
     private String plan;
     private Double local_inter_minute;
     private Double local_inter_sec;
@@ -13,6 +15,27 @@ public class TimeValue {
     private Double local_intra_sec;
     private  Double std_intra_minute;
     private Double std_intra_sec;
+    private int period;
+
+    public String getMy_num() {
+        return my_num;
+    }
+
+    public int getPeriod(){ return period; }
+
+    public void setPeriod(int period){this.period=period;}
+
+    public String getMy_operator() {
+        return my_operator;
+    }
+
+    public void setMy_operator(String my_operator) {
+        this.my_operator = my_operator;
+    }
+
+    public void setMy_num(String my_num) {
+        this.my_num = my_num;
+    }
 
     public String getPlan() {
         return plan;

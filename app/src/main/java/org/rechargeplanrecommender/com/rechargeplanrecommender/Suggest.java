@@ -18,6 +18,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Suggest extends ListActivity implements  AdapterView.OnItemClickListener {
@@ -44,6 +46,8 @@ public class Suggest extends ListActivity implements  AdapterView.OnItemClickLis
     private static final String TAG_OPERATOR_MASTER = "operator_master";
     private static final String TAG_RECHARGE_MASTER = "recharge_master";
     private static final String TAG_IS_PREPAID = "is_prepaid";
+    private static final String ESTIMATED_COST = "estimated_cost";
+    private static final String VALUE1 = "value";
     //private static  int length=10;
 
     // contacts JSONArray
@@ -60,9 +64,9 @@ public class Suggest extends ListActivity implements  AdapterView.OnItemClickLis
         dataList = new ArrayList<HashMap<String, String>>();
 
         lv= getListView();
-//        Bundle b=getIntent().getExtras();
-//        str  = b.getString("str");
-       // Log.e("Suggest",str);
+        Bundle b=getIntent().getExtras();
+        str  = b.getString("str");
+        Log.e("Suggest",str);
         new GetDatas().execute();
         lv.setOnItemClickListener(this);
     }
@@ -79,16 +83,59 @@ public class Suggest extends ListActivity implements  AdapterView.OnItemClickLis
         intent.putExtra("operator",operator );
         String validity=data.get(TAG_RECHARGE_VALIDITY);
         intent.putExtra("validity",validity );
+        String estimated=data.get(ESTIMATED_COST);
+        intent.putExtra("estimated_cost",estimated);
+        String description=data.get(TAG_RECHARGE_DESCRIPTION);
+
+        intent.putExtra("description",description);
 
         startActivity(intent);
     }
 
+    class MapComparator implements Comparator<HashMap<String, String>>
+    {
+        private final String key;
+
+        public MapComparator(String key)
+        {
+            this.key = key;
+        }
+
+        public int compare(HashMap<String, String> first,
+                           HashMap<String, String> second)
+        {
+            // TODO: Null checking, both for maps and values
+
+            String firstValue = first.get(key);
+            String secondValue = second.get(key);
+//            if (firstValue == null ^ secondValue == null) {
+//                return (firstValue == null) ? -1 : 1;
+//            }
+//
+//            if (firstValue == null && secondValue == null) {
+//                return 0;
+//            }
+
+            if(secondValue==null)return -1;
+//            if(firstValue == null)
+//                if(secondValue == null)
+//                    return 0; //equal
+//                else
+//                    return -1; // null is before other strings
+//            else // this.member != null
+//                if(secondValue == null)
+//                    return 1;  // all other strings are after null
+//                else
+            return firstValue.compareTo(secondValue);
+
+        }
+    }
 
     /**
      * Async task class to get json by making HTTP call
      * */
     private class GetDatas extends AsyncTask<Void, Void, Void> {
-    private Suggest suggest;
+        private Suggest suggest;
         public GetDatas(Suggest suggest) {
             this.suggest=suggest;
         }
@@ -113,10 +160,10 @@ public class Suggest extends ListActivity implements  AdapterView.OnItemClickLis
             ServiceHandler sh = new ServiceHandler();
 
             // Making a request to url and getting response
-          String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
-            //String jsonStr = "[{\"data\":[{\"id\":\"12954868\",\"recharge_value\":\"5\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"1 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" National Roaming Voice Calls O G LOC or STD Calls 1.5 ps per Sec\",\"recharge_description_more\":\" FREE INCOMING CALLS: ROAM_5\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954872\",\"recharge_value\":\"21\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"30 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Free call Forwarding to any BSNL Landline WLL number within LSA\",\"recharge_description_more\":\" VOICE_21\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954880\",\"recharge_value\":\"44\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"30 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Local Any Net Call 1.4ps per 2 Sec\",\"recharge_description_more\":\" VOICE_44\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954882\",\"recharge_value\":\"47\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"28 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" 20ps min Loc on net\",\"recharge_description_more\":\" STV_47\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954884\",\"recharge_value\":\"65\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"28 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" 12ps per Min Local On net\",\"recharge_description_more\":\" VOICE_65\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954886\",\"recharge_value\":\"69\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"30 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" National Roaming Voice Calls O G LOC or STD Calls 1.5 ps per Sec\",\"recharge_description_more\":\" FREE INCOMING CALLS: ROAM_69\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954888\",\"recharge_value\":\"84\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"84 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" STD voice calls at Rs 0.35 PER Min with 84 days\",\"recharge_description_more\":\" STD_VOICE_84\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954890\",\"recharge_value\":\"91\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"90 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" National Roaming Voice Calls O G LOC or STD Calls 1.5 ps per Sec\",\"recharge_description_more\":\" FREE INCOMING CALLS: RoamSTV_91\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954892\",\"recharge_value\":\"132\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"90 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Local Any Net Call 1.4ps per 2 Sec\",\"recharge_description_more\":\" VOICE_132\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954898\",\"recharge_value\":\"164\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"6 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Unlimited Local or STD On Net\",\"recharge_description_more\":\" VOICE_164\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954900\",\"recharge_value\":\"344\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"27 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Local call On Net Unlimited free\",\"recharge_description_more\":\" VOICE_344\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954910\",\"recharge_value\":\"894\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"81 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Local call On Net Unlimited free\",\"recharge_description_more\":\" VOICE_894\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"14552797\",\"recharge_value\":\"18\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"30 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" All Voice calls to Nepal Rs.8.50 per Minute with validity of 30 Days\",\"recharge_description_more\":\" ISD_18\",\"product_type\":\"Mobile\",\"circle_master\":\"Karnataka\",\"operator_master\":\"Bsnl\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"}]}]";
-          //  String jsonStr=str;
-            jsonStr = jsonStr.substring(1, jsonStr.length()-1);
+            //String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
+            //  String jsonStr = "{\"data\":[{\"id\":\"12954868\",\"recharge_value\":\"5\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"1 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" National Roaming Voice Calls O G LOC or STD Calls 1.5 ps per Sec\",\"recharge_description_more\":\" FREE INCOMING CALLS: ROAM_5\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954872\",\"recharge_value\":\"21\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"30 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Free call Forwarding to any BSNL Landline WLL number within LSA\",\"recharge_description_more\":\" VOICE_21\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954880\",\"recharge_value\":\"44\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"30 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Local Any Net Call 1.4ps per 2 Sec\",\"recharge_description_more\":\" VOICE_44\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954882\",\"recharge_value\":\"47\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"28 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" 20ps min Loc on net\",\"recharge_description_more\":\" STV_47\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954884\",\"recharge_value\":\"65\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"28 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" 12ps per Min Local On net\",\"recharge_description_more\":\" VOICE_65\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954886\",\"recharge_value\":\"69\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"30 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" National Roaming Voice Calls O G LOC or STD Calls 1.5 ps per Sec\",\"recharge_description_more\":\" FREE INCOMING CALLS: ROAM_69\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954888\",\"recharge_value\":\"84\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"84 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" STD voice calls at Rs 0.35 PER Min with 84 days\",\"recharge_description_more\":\" STD_VOICE_84\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954890\",\"recharge_value\":\"91\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"90 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" National Roaming Voice Calls O G LOC or STD Calls 1.5 ps per Sec\",\"recharge_description_more\":\" FREE INCOMING CALLS: RoamSTV_91\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954892\",\"recharge_value\":\"132\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"90 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Local Any Net Call 1.4ps per 2 Sec\",\"recharge_description_more\":\" VOICE_132\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954898\",\"recharge_value\":\"164\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"6 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Unlimited Local or STD On Net\",\"recharge_description_more\":\" VOICE_164\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954900\",\"recharge_value\":\"344\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"27 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Local call On Net Unlimited free\",\"recharge_description_more\":\" VOICE_344\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"12954910\",\"recharge_value\":\"894\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"81 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" Local call On Net Unlimited free\",\"recharge_description_more\":\" VOICE_894\",\"product_type\":\"Datacard\",\"circle_master\":\"Karnataka\",\"operator_master\":\"BSNL\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"},{\"id\":\"14552797\",\"recharge_value\":\"18\",\"recharge_talktime\":\"0\",\"recharge_validity\":\"30 Days\",\"recharge_short_description\":\"Tariff Voucher\",\"recharge_description\":\" All Voice calls to Nepal Rs.8.50 per Minute with validity of 30 Days\",\"recharge_description_more\":\" ISD_18\",\"product_type\":\"Mobile\",\"circle_master\":\"Karnataka\",\"operator_master\":\"Bsnl\",\"recharge_master\":\"\",\"is_prepaid\":\"1\"}]}";
+            String jsonStr=str;
+            // jsonStr = jsonStr.substring(1, jsonStr.length()-1);
             Log.d("Response: ", "> " + jsonStr);
 
             if (jsonStr != null) {
@@ -126,7 +173,7 @@ public class Suggest extends ListActivity implements  AdapterView.OnItemClickLis
                     // Getting JSON Array node
                     datas = jsonObj.getJSONArray(TAG_DATAS);
 
-                    // looping through All Contacts
+                    // looping through All datas
                     for (int i = 0; i < datas.length(); i++) {
                         JSONObject calldata = datas.getJSONObject(i);
 
@@ -144,8 +191,12 @@ public class Suggest extends ListActivity implements  AdapterView.OnItemClickLis
                         String operator_master = calldata.getString(TAG_OPERATOR_MASTER);
                         String recharge_master = calldata.getString(TAG_RECHARGE_MASTER);
                         String is_prepaid = calldata.getString(TAG_IS_PREPAID);
-
-                        // tmp hashmap for single data
+                        String estimated_cost=calldata.getString(ESTIMATED_COST);
+                        int a=(Integer.parseInt(estimated_cost))/(Integer.parseInt(recharge_validity));
+                        String value1=String.valueOf(a);
+                        // Log.e("a--------------------",String.valueOf(a));
+                        Log.e("value1--------------",value1);
+                        Log.e("RV--------------",recharge_validity);  // tmp hashmap for single data
                         HashMap<String, String> data = new HashMap<String, String>();
 
                         // adding each child node to HashMap key => value
@@ -154,10 +205,17 @@ public class Suggest extends ListActivity implements  AdapterView.OnItemClickLis
                         data.put(TAG_RECHARGE_VALUE, recharge_value);
                         data.put(TAG_RECHARGE_TALKTIME, recharge_talktime);
                         data.put(TAG_RECHARGE_VALIDITY, recharge_validity);
+                        data.put(VALUE1,value1);
+                        data.put(TAG_RECHARGE_DESCRIPTION,recharge_description);
+                        data.put(ESTIMATED_COST,estimated_cost);
 
                         // adding data to data list
                         dataList.add(data);
+
                     }
+                    //    Log.e("Anisha",String.valueOf(dataList));
+                   Collections.sort(dataList, new MapComparator("value1"));
+                   //    Log.e("Anisha",String.valueOf(dataList));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -179,7 +237,7 @@ public class Suggest extends ListActivity implements  AdapterView.OnItemClickLis
              * */
             adapter = new SimpleAdapter(
                     Suggest.this, dataList,
-                    R.layout.list_item, new String[] { TAG_RECHARGE_VALUE, TAG_RECHARGE_TALKTIME,
+                    R.layout.list_item, new String[] { TAG_RECHARGE_VALUE, ESTIMATED_COST,
                     TAG_RECHARGE_VALIDITY }, new int[] { R.id.recharge_value,
                     R.id.recharge_talktime, R.id.recharge_validity });
 

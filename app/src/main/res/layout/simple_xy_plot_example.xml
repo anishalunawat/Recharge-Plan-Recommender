@@ -26,8 +26,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         androidPlot.title="Usage"
-        androidPlot.domainLabel="Month"
-        androidPlot.rangeLabel="Duration of Call (Mins)"
+        androidPlot.rangeLabel="Duration of Call (Seconds)"
         androidPlot.titleWidget.labelPaint.textSize="@dimen/title_font_size"
         androidPlot.domainLabelWidget.labelPaint.textSize="@dimen/domain_label_font_size"
         androidPlot.rangeLabelWidget.labelPaint.textSize="@dimen/range_label_font_size"
@@ -65,23 +64,23 @@
             android:id="@+id/sectionGraph"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
-            <SeekBar
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:max="300"
+            <!--  <SeekBar
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:paddingLeft="10dp"
+                  android:paddingRight="10dp"
+                  android:max="300"
 
-                android:progress="10"
-                android:id="@+id/sbFixed"/>
-            <SeekBar
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:max="50"
-                android:progress="1"
-                android:id="@+id/sbVariable"/>
+                  android:progress="10"
+                  android:id="@+id/sbFixed"/>
+              <SeekBar
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:paddingLeft="10dp"
+                  android:paddingRight="10dp"
+                  android:max="50"
+                  android:progress="1"
+                  android:id="@+id/sbVariable"/>-->
         </RelativeLayout>
     </LinearLayout>
     <LinearLayout
@@ -110,12 +109,12 @@
         android:layout_gravity="center"
         android:orientation="horizontal">
         <CheckBox android:id="@+id/s1CheckBox"
-            android:text="Series 1"
+            android:text="LOCAL"
             android:checked="true"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"/>
         <CheckBox android:id="@+id/s2CheckBox"
-            android:text="Series 2"
+            android:text="STD"
             android:checked="true"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"/>

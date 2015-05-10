@@ -5,17 +5,21 @@
         tools:context=".MainActivity"
         android:gravity="center"
         android:orientation="vertical"
-        >
+        android:layout_marginTop="30dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="50dp"
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/phone"
+            android:textColor="@color/my"
+            android:textStyle="bold"
+            android:textSize="20dp"
             android:id="@+id/phonetext"
             android:layout_gravity="center_horizontal"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -37,46 +41,68 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:layout_marginBottom="50dp">
 
-        <Spinner
-            android:id="@+id/circle_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            android:visibility="visible"
-            android:layout_marginBottom="10dp"/>
+        <!--<Spinner-->
+            <!--android:id="@+id/circle_list"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@android:drawable/btn_dropdown"-->
+            <!--android:spinnerMode="dropdown"-->
+            <!--android:visibility="visible"-->
+            <!--android:layout_marginBottom="10dp"/>-->
 
         <Spinner
             android:id="@+id/operator_list"
-            android:layout_width="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_width="294dp"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            android:visibility="visible"/>
 
+
+           />
+        <!--
+         android:spinnerMode="dropdown"
+
+            android:popupBackground="@android:drawable/btn_dropdown"
+            android:visibility="visible"
+        android:touchscreenBlocksFocus="false"-->
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        >
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login"
+            android:textColor="#ffffff"
+            android:padding="10dp"
+            android:background="@color/my"
+            android:textSize="20dp"
             android:id="@+id/login"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/signup"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:background="@color/my"
             android:id="@+id/signup"
             android:layout_marginLeft="20dp"
             />
     </LinearLayout>
-
-
+        <!--<ProgressBar-->
+            <!--android:id="@+id/progressBar"-->
+            <!--style="?android:attr/progressBarStyleHorizontal"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:indeterminate="false"-->
+            <!--android:max="100"-->
+            <!--android:progressDrawable="@drawable/spin" />-->
 </LinearLayout>

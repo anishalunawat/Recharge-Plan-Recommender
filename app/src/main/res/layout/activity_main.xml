@@ -3,155 +3,192 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:gravity="center"
+    android:gravity="bottom"
     android:orientation="vertical"
-    android:layout_marginBottom="30dp"
     >
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="30dp"
-    android:layout_marginTop="5dp">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/suggest"
-        android:id="@+id/suggest"
-        android:layout_marginLeft="60dp"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Usage"
-        android:id="@+id/usage_graph"
-        android:layout_marginLeft="40dp"/>
-</LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp">
+        android:layout_marginLeft="30dp"
+        android:paddingBottom="40dp"
+        android:paddingTop="2dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/Operator"
+
+        <Button
+            android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:hint="@string/operator"
-            android:layout_marginLeft="75dp"/>
+            android:text="LOG OUT"
+            android:padding="4dp"
 
-        <TextView
-            android:id="@+id/local_minute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Value"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#43bd00"
-            android:layout_marginLeft="80dp"/>
-
+            android:textColor="#ffffff"
+            android:background="@color/my"
+            android:textSize="15dp"
+            android:layout_marginLeft="250dp"/>
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp">
-
-        <TextView
-            android:id="@+id/Operator"
-            android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="60dp" >
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Local Sec"
-            android:layout_marginLeft="70dp"/>
+            android:layout_marginBottom="30dp">
 
-        <TextView
-            android:id="@+id/local_sec"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/Operator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/my"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="Local Min"
+                android:layout_marginLeft="80dp"/>
+
+            <TextView
+                android:id="@+id/local_minute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Value"
+                android:textSize="20sp"
+                android:textColor="@color/my"
+                android:layout_marginLeft="51dp"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Value"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#43bd00"
-            android:layout_marginLeft="90dp"/>
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/Operator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/my"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="Local Sec"
+                android:layout_marginLeft="80dp"/>
+
+            <TextView
+                android:id="@+id/local_sec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Value"
+                android:textSize="20sp"
+                android:textColor="@color/my"
+                android:layout_marginLeft="51dp"/>
 
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/Operator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/my"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="STD Min"
+                android:layout_marginLeft="80dp" />
+
+            <TextView
+                android:id="@+id/std_minute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Value"
+                android:textSize="20sp"
+                android:layout_marginLeft="63dp"
+                android:textColor="@color/my" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/Operator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/my"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="STD Sec"
+                android:layout_marginLeft="80dp"/>
+
+            <TextView
+                android:id="@+id/std_sec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Value"
+                android:textSize="20sp"
+                android:layout_marginLeft="65dp"
+                android:textColor="@color/my" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="5dp">
+
+
+            <Button
+                android:id="@+id/btnPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HISTORY"
+
+                android:textColor="#ffffff"
+                android:padding="10dp"
+                android:background="@color/my"
+                android:textSize="15dp"
+                android:layout_marginLeft="70dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Usage"
+
+                android:textColor="#ffffff"
+                android:padding="10dp"
+                android:background="@color/my"
+                android:textSize="15dp"
+                android:id="@+id/usage_graph"
+                android:layout_marginLeft="40dp"/>
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp">
-
-        <TextView
-            android:id="@+id/Operator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="STD Min"
-            android:layout_marginLeft="70dp" />
-
-        <TextView
-            android:id="@+id/std_minute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Value"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="100dp"
-            android:textColor="#43bd00" />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp">
-
-        <TextView
-            android:id="@+id/Operator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="STD Sec"
-            android:layout_marginLeft="70dp"/>
-
-        <TextView
-            android:id="@+id/std_sec"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Value"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="100dp"
-            android:textColor="#43bd00" />
-
-
-    </LinearLayout>
-
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="30dp"
-    android:gravity="center">
-    <Button
-        android:id="@+id/btnPost"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="CLICK ME" />
-
-</LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        >
+        <Button
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hello_world"
-            android:id="@+id/tvIsConnected"
-            />
-        </LinearLayout>
+            android:text="@string/suggest"
+            android:id="@+id/suggest"
+
+            android:textColor="#ffffff"
+            android:padding="10dp"
+            android:background="@color/my"
+            android:textSize="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </LinearLayout>
 
 
 

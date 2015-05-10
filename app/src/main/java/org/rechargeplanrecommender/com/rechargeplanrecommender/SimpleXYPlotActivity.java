@@ -3,7 +3,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,10 +31,6 @@ import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 
-import java.text.DateFormatSymbols;
-import java.text.FieldPosition;
-import java.text.NumberFormat;
-import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -58,7 +53,6 @@ public class SimpleXYPlotActivity extends MainActivity1
     private enum SeriesSize {
         TEN,
         TWENTY
-       // THIRTY
     }
 
     // Create a couple arrays of y-values to plot:
@@ -66,8 +60,6 @@ public class SimpleXYPlotActivity extends MainActivity1
     ArrayList<Number> series2Numbers10 =new ArrayList<Number>();
     ArrayList<Number> series1Numbers20 =new ArrayList<Number>();
     ArrayList<Number> series2Numbers20 =new ArrayList<Number>();
-    //ArrayList<Number> series1Numbers30 =new ArrayList<Number>();
-    //ArrayList<Number> series2Numbers30 =new ArrayList<Number>();
     ArrayList<Number> series1Numbers = series1Numbers10;
     ArrayList<Number> series2Numbers = series2Numbers10;
 
@@ -89,15 +81,9 @@ public class SimpleXYPlotActivity extends MainActivity1
             series2Numbers10.add(0);
             series1Numbers20.add(0);
             series2Numbers20.add(0);
-           // series1Numbers30.add(0);
-           // series2Numbers30.add(0);
         }
 
-        Log.e("error", "check1 -" + String.valueOf(n));
-        // take array of local nd std min  as returned value
-
         getGraphDetails(n,my_num);
-        Log.e("success","check2");
         if(n==10)
         {
             series1Numbers10 =new ArrayList<Number>(get_local_sec());
@@ -108,23 +94,15 @@ public class SimpleXYPlotActivity extends MainActivity1
             series1Numbers20 = new ArrayList<Number>(get_local_sec());
             series2Numbers20 =new ArrayList<Number>(get_std_sec());
         }
-      //  else
-       // {
-       //     series1Numbers30 =new ArrayList<Number>(get_local_sec());
-        //    series2Numbers30 = new ArrayList<Number>(get_std_sec());
-       // }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_xy_plot_example);
-
         Bundle b= getIntent().getExtras();
         my_num=b.getString("my_num");
-
 
         // initialize our XYPlot reference:
         plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
@@ -200,27 +178,27 @@ public class SimpleXYPlotActivity extends MainActivity1
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
-        spWidthStyle = (Spinner) findViewById(R.id.spWidthStyle);
+        BarRenderer.BarWidthStyle.FIXED_WIDTH.ordinal();
+      /* spWidthStyle = (Spinner) findViewById(R.id.spWidthStyle);
         ArrayAdapter <BarRenderer.BarWidthStyle> adapter1 = new ArrayAdapter <BarRenderer.BarWidthStyle> (this, android.R.layout.simple_spinner_item, BarRenderer.BarWidthStyle.values() );
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spWidthStyle.setAdapter(adapter1);
-        spWidthStyle.setSelection(BarRenderer.BarWidthStyle.FIXED_WIDTH.ordinal());
-        spWidthStyle.setOnItemSelectedListener(new OnItemSelectedListener() {
+       spWidthStyle.setSelection(BarRenderer.BarWidthStyle.FIXED_WIDTH.ordinal());
+       spWidthStyle.setOnItemSelectedListener(new OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
                 if (BarRenderer.BarWidthStyle.FIXED_WIDTH.equals(spWidthStyle.getSelectedItem())) {
                     sbFixedWidth.setVisibility(View.VISIBLE);
-                    sbVariableWidth.setVisibility(View.INVISIBLE);
+                   sbVariableWidth.setVisibility(View.INVISIBLE);
                 } else {
-                    sbFixedWidth.setVisibility(View.INVISIBLE);
+                  sbFixedWidth.setVisibility(View.INVISIBLE);
                     sbVariableWidth.setVisibility(View.VISIBLE);
-                }
+              }
                 updatePlot();
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
             }
-        });
+        });*/
 
         spSeriesSize = (Spinner) findViewById(R.id.spSeriesSize);
         ArrayAdapter <SeriesSize> adapter11 = new ArrayAdapter <SeriesSize> (this, android.R.layout.simple_spinner_item, SeriesSize.values() );
@@ -240,11 +218,6 @@ public class SimpleXYPlotActivity extends MainActivity1
                         series1Numbers = series1Numbers20;
                         series2Numbers = series2Numbers20;
                         break;
-                   // case THIRTY:
-                    //    eval_day(30);
-                     //   series1Numbers = series1Numbers30;
-                      //  series2Numbers = series2Numbers30;
-                      //  break;
                     default:
                         break;
                 }
@@ -256,7 +229,7 @@ public class SimpleXYPlotActivity extends MainActivity1
         });
 
 
-        sbFixedWidth = (SeekBar) findViewById(R.id.sbFixed);
+       /* sbFixedWidth = (SeekBar) findViewById(R.id.sbFixed);
         sbFixedWidth.setProgress(50);
         sbFixedWidth.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -268,7 +241,6 @@ public class SimpleXYPlotActivity extends MainActivity1
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-
         sbVariableWidth = (SeekBar) findViewById(R.id.sbVariable);
         sbVariableWidth.setProgress(1);
         sbVariableWidth.setVisibility(View.INVISIBLE);
@@ -279,9 +251,9 @@ public class SimpleXYPlotActivity extends MainActivity1
             public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
+        });*/
 
-        plot.setDomainValueFormat(new NumberFormat() {
+      /*  plot.setDomainValueFormat(new NumberFormat() {
             @Override
             public StringBuffer format(double value, StringBuffer buffer, FieldPosition field) {
                 int year = (int) (value + 0.5d) / 12;
@@ -299,7 +271,7 @@ public class SimpleXYPlotActivity extends MainActivity1
                 throw new UnsupportedOperationException("Not yet implemented.");
             }
         });
-        updatePlot();
+        updatePlot();*/
 
     }
 
@@ -313,7 +285,7 @@ public class SimpleXYPlotActivity extends MainActivity1
         }
 
         // Setup our Series with the selected number of elements
-        series1 = new SimpleXYSeries((series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Local");
+        series1 = new SimpleXYSeries((series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "LOCAL");
         series2 = new SimpleXYSeries((series2Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "STD");
 
         // add a new series' to the xyplot:
@@ -323,13 +295,18 @@ public class SimpleXYPlotActivity extends MainActivity1
         // Setup the BarRenderer with our selected options
         MyBarRenderer renderer = ((MyBarRenderer)plot.getRenderer(MyBarRenderer.class));
         renderer.setBarRenderStyle((BarRenderer.BarRenderStyle)spRenderStyle.getSelectedItem());
-        renderer.setBarWidthStyle((BarRenderer.BarWidthStyle)spWidthStyle.getSelectedItem());
-        renderer.setBarWidth(sbFixedWidth.getProgress());
-        renderer.setBarGap(sbVariableWidth.getProgress());
+        renderer.setBarWidthStyle(BarRenderer.BarWidthStyle.FIXED_WIDTH);
+        renderer.setBarWidth(50);
+//         renderer.setBarWidthStyle((BarRenderer.BarWidthStyle)spWidthStyle.getSelectedItem());
+//         renderer.setBarWidth(sbFixedWidth.getProgress());
+//         renderer.setBarGap(sbVariableWidth.getProgress());
 
-        if (BarRenderer.BarRenderStyle.STACKED.equals(spRenderStyle.getSelectedItem())) {
+        if (BarRenderer.BarRenderStyle.STACKED.equals(spRenderStyle.getSelectedItem()))
+        {
             plot.setRangeTopMin(15);
-        } else {
+        }
+        else
+        {
             plot.setRangeTopMin(0);
         }
 
@@ -411,7 +388,8 @@ public class SimpleXYPlotActivity extends MainActivity1
         plot.redraw();
     }
 
-    class MyBarFormatter extends BarFormatter {
+    class MyBarFormatter extends BarFormatter
+    {
         public MyBarFormatter(int fillColor, int borderColor) {
             super(fillColor, borderColor);
         }
@@ -427,8 +405,8 @@ public class SimpleXYPlotActivity extends MainActivity1
         }
     }
 
-    class MyBarRenderer extends BarRenderer<MyBarFormatter> {
-
+    class MyBarRenderer extends BarRenderer<MyBarFormatter>
+    {
         public MyBarRenderer(XYPlot plot) {
             super(plot);
         }
